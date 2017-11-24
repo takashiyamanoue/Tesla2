@@ -1,0 +1,4 @@
+class AFigElement extends AFigure
+{
+}
+
