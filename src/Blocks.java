@@ -96,9 +96,9 @@ class Blocks extends ABlock
         while(p!=null) {
             if(p.block==null) writeMessage("Blocks.select, p.fig is null\n");
             if(p.block.isSelected(x,y)&&(fs==null)){
-                p.block.selected=true;
+                p.block.setSelected(true);
                 fs=p.block;}
-            else p.block.selected=false;
+            else p.block.setSelected(false);
             p=p.next;
         }
         return fs;

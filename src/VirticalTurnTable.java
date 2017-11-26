@@ -3,13 +3,13 @@ class VirticalTurnTable extends TurnTable
 {
     public void advance()
     {
-         if(button.onoff){
+         if(button.isOn()){
             ABlock ab=ablockOn(offX,offY,0);
             if(ab!=null) {
                 ab.rotateNS();
-                ab.selected=false;
+                ab.setSelected(false);
             }
-            button.onoff=false;
+            button.setOnOff(false);
         }
     }
     public VirticalTurnTable(FigCanvas c, int x, int y)
@@ -28,9 +28,9 @@ class VirticalTurnTable extends TurnTable
             ABlock ab=ablockOn(offX,offY,0);
             if(ab!=null){
                 ab.rotateNS();
-                ab.selected=false;
+                ab.setSelected(false);
             }
-            button.onoff=false;
+            button.setOnOff(false);
             return true;
         }
         else

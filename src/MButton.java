@@ -23,7 +23,14 @@ class MButton extends AFigElement
         }
         return false;
     }
-    public boolean onoff;
+    private boolean onoff;
+    public void setOnOff(boolean tf) {
+    	System.out.println("");
+    	onoff=tf;
+    }
+    public boolean isOn() {
+    	return onoff;
+    }
     public MButton(FigCanvas c,int x, int y)
     {
         canvas=c;

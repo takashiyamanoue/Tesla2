@@ -71,7 +71,7 @@ class EditDispatcher extends java.lang.Object
 
         mes.appendText("new block = "+ft+"\n");
         if(fc.ftemp!=null) {
-            fc.ftemp.selected=false;
+            fc.ftemp.setSelected(false);
             fc.fs.add(fc.ftemp);
             fc.ftemp=null;
             }
@@ -80,7 +80,7 @@ class EditDispatcher extends java.lang.Object
             newblock=new ABlock1(fc);
             fc.ftemp=(ABlock)newblock;
             fc.ftemp.state="Moving";
-            fc.ftemp.selected=true;
+            fc.ftemp.setSelected(true);
             fc.ftemp.showhide=true;
             return;}
 
@@ -178,11 +178,13 @@ class EditDispatcher extends java.lang.Object
     {
     	int x=fc.logicalX(xp);
     	int y=fc.logicalY(yp);
+//    	int x=xp;
+//    	int y=yp;
 //        mes.appendText("edispatch mouseDown("+x+","+y+")\n");
         if(state.equals("New")){
             if(fc.ftemp!=null){
                fc.ftemp.alligin2Grid(x,y);
-               fc.ftemp.selected=false;
+               fc.ftemp.setSelected(false);
                fc.fs.add(fc.ftemp);
                fc.ftemp=null;
                 newBlock(gui.figNamField.getText());
@@ -197,21 +199,21 @@ class EditDispatcher extends java.lang.Object
                 if(fc.ftemp!=null) {
                     ABlock w=f;
                     fc.fs.remove(f);
-                    fc.ftemp.selected=false;
+                    fc.ftemp.setSelected(false);
                     fc.fs.add(fc.ftemp);
                     fc.ftemp=w;
-                    fc.ftemp.selected=true;
+                    fc.ftemp.setSelected(true);
                 }
                 else
                 {
                     fc.ftemp=f;
-                    fc.ftemp.selected=true;
+                    fc.ftemp.setSelected(true);
                     fs.remove(f);
                 }
             }
             else
             {
-                fc.ftemp.selected=false;
+                fc.ftemp.setSelected(false);
                 fs.add(fc.ftemp);
                 fc.ftemp=null;
             }

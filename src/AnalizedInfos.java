@@ -12,7 +12,9 @@ class AnalizedInfos extends Objes
             if(blocksInArray[jw][iw]!=null){
                 int upSide=blocksInArray[jw][iw].faces[0].faceID;
                 int eastSide=blocksInArray[jw][iw].faces[1].faceID;
-                factoryCntlr.setNewBlock(upSide,eastSide);
+                String sid=blocksInArray[jw][iw].sID;
+                System.out.println("AnalizedInfos.reConstruct3 upSide="+upSide+",eastSide="+eastSide);
+                factoryCntlr.setNewBlock(upSide,eastSide,sid);
                 factoryCntlr.pushBlockX(iw);
             }
           }

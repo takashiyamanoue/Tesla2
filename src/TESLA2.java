@@ -66,7 +66,7 @@ public class TESLA2 extends JFrame {
 		  if(fcanvas.fs.bp!=null){
 		    if(fcanvas.ftemp!=null &&
 		       editdispatch.state.equals("Select")){
-		        fcanvas.ftemp.selected=false;
+		        fcanvas.ftemp.setSelected(false);
 		        fcanvas.fs.add(fcanvas.ftemp);
 		        fcanvas.ftemp=null;
 		        fcanvas.repaint();
@@ -282,7 +282,12 @@ public class TESLA2 extends JFrame {
 
 		//{{INIT_CONTROLS
 		setLayout(null);
+		try {
 		addNotify();
+		}
+		catch(Exception e) {
+			System.out.println("addNotify-e:"+e);
+		}
 		resize(768,880);
 		label1 = new java.awt.Label("Edit");
 		label1.reshape(36,12,53,12);

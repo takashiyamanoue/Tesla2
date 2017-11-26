@@ -15,6 +15,7 @@ class ABlock extends AFigure
     public void setinfo(AnalizedInfo ainfo)
     {
         sID=ainfo.blockID;
+        System.out.println("ABlock.setinfo sID="+sID);
         for(int i=0;i<6;i++){
             if(faces[i].faceID==ainfo.faceID){
                 faces[i].setinfo(ainfo);
@@ -42,7 +43,8 @@ class ABlock extends AFigure
         if(anaMark) return;
         anaMark=true;
         sID=id;
-        canvas.editdispatch.mes.appendText(sID+" is Analizing...\n");
+        System.out.println("ABlock sID="+sID);
+        canvas.editdispatch.mes.appendText(sID+" being Analized...\n");
         for(i=0;i<6;i++)
            if(faces[i].isConnected(bs))
               faces[i].nextdoorBlock.analyze(bs,sID+"-"+i,ainfo);
@@ -54,12 +56,20 @@ class ABlock extends AFigure
     public void rotateHlz()
     {
         AFaceState faceWork;
+        System.out.println("ABlock.rotateHlz:");
+        System.out.println("-up="+faces[currentUpFace()].faceID+"-dn="+faces[currentDownFace()].faceID+
+        		"-nr="+faces[currentNorthFace()].faceID+"-ea="+faces[currentEastFace()].faceID+
+        		"-so"+faces[currentSouthFace()].faceID+"-we="+faces[currentWestFace()].faceID);
         int work=currentEastFace();
         faceWork=faces[currentEastFace()];
         faces[currentEastFace()]=faces[currentSouthFace()];
         faces[currentSouthFace()]=faces[currentWestFace()];
         faces[currentWestFace()]=faces[currentNorthFace()];
         faces[currentNorthFace()]=faceWork;
+        System.out.println("-up="+faces[currentUpFace()].faceID+"-dn="+faces[currentDownFace()].faceID+
+        		"-nr="+faces[currentNorthFace()].faceID+"-ea="+faces[currentEastFace()].faceID+
+        		"-so"+faces[currentSouthFace()].faceID+"-we="+faces[currentWestFace()].faceID);
+      	System.out.println("ABlock.draw sID="+sID+"-currentUpFace()="+faces[currentUpFace()].faceID);
     }
     public boolean moveMark;
     public void push(Blocks bs, ABlock bb, double x, double y, double dx, double dy)
@@ -131,7 +141,8 @@ class ABlock extends AFigure
     public void alligin2Grid(int xx, int yy)
     {
         int x,y,n;
-        x=logicalX(xx); y=logicalY(yy);
+//        x=logicalX(xx); y=logicalY(yy);
+        x=xx;y=yy;
         n=x / width;
         offX=n*width+width/2;
         n=y / width;
@@ -196,12 +207,20 @@ class ABlock extends AFigure
     public void rotateEW()
     {
         AFaceState faceWork;
+        System.out.println("ABlock.rotateEW:");
+        System.out.println("-up="+faces[currentUpFace()].faceID+"-dn="+faces[currentDownFace()].faceID+
+        		"-nr="+faces[currentNorthFace()].faceID+"-ea="+faces[currentEastFace()].faceID+
+        		"-so"+faces[currentSouthFace()].faceID+"-we="+faces[currentWestFace()].faceID);
         faceWork=faces[currentWestFace()];
         faces[currentWestFace()]=faces[currentDownFace()];
         faces[currentDownFace()]=faces[currentEastFace()];
         faces[currentEastFace()]=faces[currentUpFace()];
         faces[currentUpFace()]=faceWork;
   //      UpFace=currentWestFace();
+        System.out.println("-up="+faces[currentUpFace()].faceID+"-dn="+faces[currentDownFace()].faceID+
+        		"-nr="+faces[currentNorthFace()].faceID+"-ea="+faces[currentEastFace()].faceID+
+        		"-so"+faces[currentSouthFace()].faceID+"-we="+faces[currentWestFace()].faceID);
+      	System.out.println("ABlock.draw sID="+sID+"-currentUpFace()="+faces[currentUpFace()].faceID);
     }
 
 
@@ -250,6 +269,10 @@ class ABlock extends AFigure
     public void rotateNS()
     {
         AFaceState faceWork;
+        System.out.println("ABlock.rotateNS:");
+        System.out.println("-up="+faces[currentUpFace()].faceID+"-dn="+faces[currentDownFace()].faceID+
+        		"-nr="+faces[currentNorthFace()].faceID+"-ea="+faces[currentEastFace()].faceID+
+        		"-so"+faces[currentSouthFace()].faceID+"-we="+faces[currentWestFace()].faceID);
         int work=currentSouthFace();
         faceWork=faces[currentUpFace()];
         faces[currentUpFace()]=faces[currentSouthFace()];
@@ -258,6 +281,10 @@ class ABlock extends AFigure
         faces[currentNorthFace()]=faceWork;
 //        NorthFace=currentUpFace();
 //        UpFace=work;
+        System.out.println("-up="+faces[currentUpFace()].faceID+"-dn="+faces[currentDownFace()].faceID+
+        		"-nr="+faces[currentNorthFace()].faceID+"-ea="+faces[currentEastFace()].faceID+
+        		"-so"+faces[currentSouthFace()].faceID+"-we="+faces[currentWestFace()].faceID); 
+      	System.out.println("ABlock.draw sID="+sID+"-currentUpFace()="+faces[currentUpFace()].faceID);
     }
     public int width;
 
@@ -468,7 +495,13 @@ class ABlock extends AFigure
    y=(a*a*y0+b*c-a*b*x0)/d;  p.y=(int)y;
    return p;
  }
-    public boolean selected;
+    private boolean selected;
+    public void setSelected(boolean tf) {
+    	selected=tf;
+    }
+    public boolean isSelected() {
+    	return selected;
+    }
     public ABlock()
     {
         init();
@@ -489,9 +522,12 @@ class ABlock extends AFigure
     }
     public void draw(Graphics g)
     {
+//    	System.out.println("ABlock.draw sID="+sID+"-currentUpFace()="+faces[currentUpFace()].faceID);
         if(showhide){
+//        	if(this.sID==null) return;
+        	AFaceState fs=faces[currentUpFace()];
             if(selected)  drawTemp(g);
-            else          faces[currentUpFace()].draw(g);
+            else          fs.draw(g);
         }
     }
     public boolean isPointed(int x, int y, int x2, int y2)

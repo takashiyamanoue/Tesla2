@@ -55,9 +55,11 @@ class Factory extends FigCanvas
   //      repaint();
         return true;
     }
-    public boolean mouseDown(Event e, int x, int y)
+    public boolean mouseDown(Event e, int xp, int yp)
     {
 //        fcontroller.mouseDown(e,x,y);
+    	int x=logicalX(xp);
+    	int y=logicalY(yp);
         boolean b;
         if(ms!=null) b=ms.isSelected(x,y);
 //        repaint();

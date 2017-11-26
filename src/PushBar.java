@@ -5,7 +5,7 @@ class PushBar extends AssembleMachine
     public void advance()
     {
         double dd=1.0;
-        if(button.onoff)
+        if(button.isOn())
         {
             if(expand<extlength){
                 double dx=(dd
@@ -81,7 +81,7 @@ class PushBar extends AssembleMachine
     public void init(FigCanvas c)
     {
         button=new MButton(c, pushbar,-20,0);
-        button.onoff=false;
+        button.setOnOff(false);
         button.direction=this.direction;
         pushbar.add(button);
         reshape();

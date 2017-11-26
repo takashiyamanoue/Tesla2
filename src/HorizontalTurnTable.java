@@ -3,13 +3,13 @@ class HorizontalTurnTable extends TurnTable
 {
     public void advance()
     {
-         if(button.onoff){
+         if(button.isOn()){
             ABlock ab=ablockOn(offX,offY,0);
             if(ab!=null){
                 ab.rotateHlz();
-                ab.selected=false;
+                ab.setSelected(false);
             }
-            button.onoff=false;
+            button.setOnOff(false);
         }
     }
     public void draw(Graphics g)
@@ -30,9 +30,9 @@ class HorizontalTurnTable extends TurnTable
             ABlock ab=ablockOn(offX,offY,0);
             if(ab!=null) {
                 ab.rotateHlz();
-                ab.selected=false;
+                ab.setSelected(false);
             }
-            button.onoff=false;
+            button.setOnOff(false);
             return true;
         }
         else

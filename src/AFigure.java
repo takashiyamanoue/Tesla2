@@ -15,6 +15,7 @@ class AFigure extends java.lang.Object
         p2.rotate0(  direction);
         ix1=physicalX(p0.x+p1.x); iy1=physicalY(p0.y+p1.y);
         ix2=physicalX(p0.x+p2.x); iy2=physicalY(p0.y+p2.y);
+//        System.out.println("AFigure.drawFRect2-ix1="+ix1+"-iy1="+iy1+"-ix2="+ix2+"-iy2="+iy2+"-c="+c);
         int xa[]={ix1,ix2,ix2,ix1};
         int ya[]={iy1,iy1,iy2,iy2};
         Color cc=g.getColor();

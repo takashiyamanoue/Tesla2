@@ -38,7 +38,8 @@ class Figures extends AFigElement
         my=logicalY(y);
         p=flist;
         while(p!=null){
-            if(p.f.isSelected(mx,my)) return true;
+//            if(p.f.isSelected(mx,my)) return true;
+        	if(p.f.isSelected(x, y)) return true;
             p=p.next;
         }
         return false;

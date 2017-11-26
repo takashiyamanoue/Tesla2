@@ -3,9 +3,9 @@ class Hopper extends AssembleMachine
 {
     public void advance()
     {
-        if(button.onoff){
+        if(button.isOn()){
             hopABlock();
-            button.onoff=false;
+            button.setOnOff(false);
         }
     }
     public void hopABlock()
@@ -30,7 +30,7 @@ class Hopper extends AssembleMachine
             b.showhide=true;
             canvas.fs.add(b);*/
             hopABlock();
-            button.onoff=false;
+            button.setOnOff(false);
             return true;
         }
         else

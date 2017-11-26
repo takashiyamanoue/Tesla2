@@ -9,8 +9,8 @@ class FactoryController extends java.lang.Object implements Runnable
           (VirticalTurnTable)machines.get("vtb");
         while(state<4){
              if(bx.faces[0].faceID==up) return;
-             vtb.button.onoff=true;
-             while(vtb.button.onoff==true) {
+             vtb.button.setOnOff(true);
+             while(vtb.button.isOn()) {
                 doTick();
                 try{ myThread.sleep(300);}
                 catch(InterruptedException e){}
@@ -24,20 +24,20 @@ class FactoryController extends java.lang.Object implements Runnable
         if(setE1(east,bx)) return;
 
         PushBar p2=(PushBar)machines.get("pb2");
-        p2.button.onoff=true;
+        p2.button.setOnOff(true);
         while(!p2.isExpanded) doTick();
-        p2.button.onoff=false;
+        p2.button.setOnOff(false);
 
         VirticalTurnTable vtb=
           (VirticalTurnTable)machines.get("vtb");
-        vtb.button.onoff=true;
-        while(vtb.button.onoff) doTick();
+        vtb.button.setOnOff(true);
+        while(vtb.button.isOn()) doTick();
         bx.rotateNS();
 
         PushBar p5=(PushBar)machines.get("pb5");
-        p5.button.onoff=true;
+        p5.button.setOnOff(true);
         while(!p5.isExpanded) doTick();
-        p5.button.onoff=false;
+        p5.button.setOnOff(false);
 
         boolean t=setE1(east,bx);
 
@@ -50,8 +50,8 @@ class FactoryController extends java.lang.Object implements Runnable
           (HorizontalTurnTable)machines.get("htb");
         while(state<4){
              if(bx.faces[1].faceID==east) return true;
-             htb.button.onoff=true;
-             while(htb.button.onoff==true) {
+             htb.button.setOnOff(true);
+             while(htb.button.isOn()) {
                 doTick();
                 try{ myThread.sleep(300); }
                 catch(InterruptedException e){}
@@ -77,23 +77,23 @@ class FactoryController extends java.lang.Object implements Runnable
         p1.extlength=len;
         p2.extlength=len;
         p3.extlength=len;
-        p1.button.onoff=true;
-        p2.button.onoff=true;
-        p3.button.onoff=true;
+        p1.button.setOnOff(true);
+        p2.button.setOnOff(true);
+        p3.button.setOnOff(true);
         while(!(p1.isExpanded &&
                 p2.isExpanded &&
                 p3.isExpanded  ) ) doTick();
-        p1.button.onoff=false;
-        p2.button.onoff=false;
-        p3.button.onoff=false;
+        p1.button.setOnOff(false);
+        p2.button.setOnOff(false);
+        p3.button.setOnOff(false);
     }
     public void pushBlockX(int ix)
     {
         PushBar p1=(PushBar)machines.get("pb3");
         p1.extlength=102+ix*20;
-        p1.button.onoff=true;
+        p1.button.setOnOff(true);
         while(!p1.isExpanded) doTick();
-        p1.button.onoff=false;
+        p1.button.setOnOff(false);
     }
     public void doTick()
     {
@@ -103,34 +103,35 @@ class FactoryController extends java.lang.Object implements Runnable
         catch(InterruptedException e) {}
 
     }
-    public void setNewBlock(int uf, int ef)
+    public void setNewBlock(int uf, int ef, String bid)
     {
         Hopper h=(Hopper)machines.get("h1");
-        h.button.onoff=true;
-        while(h.button.onoff==true){
+        h.button.setOnOff(true);
+        while(h.button.isOn()){
             doTick();
         }
 
         PushBar p1=(PushBar)machines.get("pb1");
-        p1.button.onoff=true;
+        p1.button.setOnOff(true);
         while(!p1.isExpanded) doTick();
-        p1.button.onoff=false;
+        p1.button.setOnOff(false);
 
 
         ABlock bx= new ABlock(fc);
+        bx.sID=bid;
         setEast(ef,bx);
 
         PushBar p2=(PushBar)machines.get("pb2");
-        p2.button.onoff=true;
+        p2.button.setOnOff(true);
         while(!p2.isExpanded) doTick();
-        p2.button.onoff=false;
+        p2.button.setOnOff(false);
 
         setUp(uf,bx);
 
         PushBar p4=(PushBar)machines.get("pb4");
-        p4.button.onoff=true;
+        p4.button.setOnOff(true);
         while(!p4.isExpanded) doTick();
-        p4.button.onoff=false;
+        p4.button.setOnOff(false);
     }
     public Hashtable machines;
     public Factory fc;
